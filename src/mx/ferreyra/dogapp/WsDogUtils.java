@@ -595,20 +595,20 @@ public class WsDogUtils {
         String action = "http://tempuri.org/insertDuenoMascota";
 
         SoapObject request = new SoapObject(namespace, method);
-        request.addProperty("idUsuario",(Integer)parameters.get("user_id"));
-        request.addProperty("duenoNombre",(String)parameters.get("owner_name"));
-        request.addProperty("duenoIdGenero",(Date)parameters.get("owner_gender"));
-        request.addProperty("duenoFechaCumpleanos",(Date)parameters.get("owner_bithday"));
-        request.addProperty("duenoIdEstado",(Integer)parameters.get("owner_state"));
-        request.addProperty("mascotaNombre",(String)parameters.get("dog_name"));
-        request.addProperty("mascotaRaza",(String)parameters.get("dog_breed"));
-        request.addProperty("mascotaIdGenero",(String)parameters.get("dog_gender"));
-        request.addProperty("mascotaIdTipoVida",(Integer)parameters.get("dog_life_style"));
-        request.addProperty("mascotaFechaCumpleanos",(Date)parameters.get("dog_birthday"));
-        request.addProperty("mascotaIdActividadFisica",(Integer)parameters.get("dog_activity"));
-        request.addProperty("mascotaImagen",(String)parameters.get("dog_image"));
-        request.addProperty("comentarios1",(String)parameters.get("comment1"));
-        request.addProperty("comentarios2",(String)parameters.get("comment2"));
+        request.addProperty("idUsuario",(String)parameters.get("idUsuario"));
+        request.addProperty("duenoNombre",(String)parameters.get("duenoNombre"));
+        request.addProperty("duenoIdGenero",(String)parameters.get("duenoIdGenero"));
+        request.addProperty("duenoFechaCumpleanos",(String)parameters.get("duenoFechaCumpleanos"));
+        request.addProperty("duenoIdEstado",(String)parameters.get("duenoIdEstado"));
+        request.addProperty("mascotaNombre",(String)parameters.get("mascotaNombre"));
+        request.addProperty("mascotaRaza",(String)parameters.get("mascotaRaza"));
+        request.addProperty("mascotaIdGenero",(String)parameters.get("mascotaIdGenero"));
+        request.addProperty("mascotaIdTipoVida",(String)parameters.get("mascotaIdTipoVida"));
+        request.addProperty("mascotaFechaCumpleanos",(String)parameters.get("mascotaFechaCumpleanos"));
+        request.addProperty("mascotaIdActividadFisica",(String)parameters.get("mascotaIdActividadFisica"));
+        request.addProperty("mascotaImagen",(String)parameters.get("mascotaImagen"));
+        request.addProperty("comentarios1",(String)parameters.get("comentarios1"));
+        request.addProperty("comentarios2",(String)parameters.get("comentarios2"));
 
         SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         envelope.setOutputSoapObject(request);

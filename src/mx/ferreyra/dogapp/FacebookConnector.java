@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+import mx.ferreyra.dogmap.UserInfoFB;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
+import com.google.gson.Gson;
 
 /*
  * Post information on Facebook wall
@@ -50,8 +52,29 @@ public class FacebookConnector {
 		this.permissions=permissions;		
 		if(activity instanceof RouteNaming)
 			this.activity=(RouteNaming) activity;
-		
+
 	}
+
+	public Object getData(){
+
+		new Thread(getDataFacebook).start();
+
+
+		return null;
+	} 
+
+	private Runnable getDataFacebook = new Runnable() {
+		@Override
+		public void run() {
+			try {
+				String me = facebook.request("me");
+				UserInfoFB user = new Gson().fromJson(me, UserInfoFB.class);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	};
 
 	/*
 	 * Returns access token for authentication 

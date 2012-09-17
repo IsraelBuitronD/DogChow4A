@@ -281,7 +281,7 @@ public class ExerciseMenu extends Activity{
 			analyticsTracker.stopSession();
 	}
 
-    @SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	private void clearCredentials() {
 		try {
 			if(facebookConnector != null)
@@ -294,117 +294,151 @@ public class ExerciseMenu extends Activity{
 		}
 	}
 
-    public void onClickNewRouteButton(View v) {
-        boolean isRouteShow = false;
-        boolean isError = false;
+	public void onClickNewRouteButton(View v) {
+		boolean isRouteShow = false;
+		boolean isError = false;
 
-        try{
-            isRouteShow = isRouteShown();
-        } catch(Exception e) {
-            Log.e(this.getClass().getSimpleName(), ""+e.getMessage());
-            isError = true;
-        }
+		try{
+			isRouteShow = isRouteShown();
+		} catch(Exception e) {
+			Log.e(this.getClass().getSimpleName(), ""+e.getMessage());
+			isError = true;
+		}
 
-        if(!isRouteShow && !isError){
-            testalert();
-        } else {
-            analyticsTracker.trackEvent("New Route",            // Category, i.e. New Route Button
-                                        "Button",               // Action, i.e. New Route
-                                        "clicked",              // Label    i.e. New Route
-                                        DogUtil.TRACKER_VALUE); // Value
+		if(!isRouteShow && !isError){
+			testalert();
+		} else {
+			analyticsTracker.trackEvent("New Route",            // Category, i.e. New Route Button
+					"Button",               // Action, i.e. New Route
+					"clicked",              // Label    i.e. New Route
+					DogUtil.TRACKER_VALUE); // Value
 
-            DogUtil.TRACKER_VALUE++;
+			DogUtil.TRACKER_VALUE++;
 
-            if(app.getCurrentUserId()==null) {
-                startActivityForResult(new Intent(this, PreSignup.class), DogChowApplication.NEW_ROUTE);
-            } else {
-                Intent i = new Intent(this, Starting.class);
-                i.putExtra("loadroute", 2);
-            	startActivity(i);
-            }
-        }
-    }
+			if(app.getCurrentUserId()==null) {
+				startActivityForResult(new Intent(this, PreSignup.class), DogUtil.NEW_ROUTE);
+			} else {
+				Intent i = new Intent(this, Starting.class);
+				i.putExtra("loadroute", 2);
+				startActivity(i);
+			}
+		}
+	}
 
-    public void onClickLoadRouteButton(View v) {
-        if(app.getCurrentUserId()==null) {
-            startActivityForResult(new Intent(this, PreSignup.class), DogChowApplication.LOAD_ROUTE);
-        } else {
-            Intent i = new Intent(this, Starting.class);
-            i.putExtra("loadroute", 1);
-        	startActivity(i);
-        }
-        analyticsTracker.trackEvent("Load Route",            // Category, i.e. New Route Button
-                                    "Button",                // Action, i.e. New Route
-                                    "clicked",               // Label    i.e. New Route
-                                    DogUtil.TRACKER_VALUE);  // Value,
+	public void onClickLoadRouteButton(View v) {
+		if(app.getCurrentUserId()==null) {
+			startActivityForResult(new Intent(this, PreSignup.class), DogUtil.LOAD_ROUTE);
+		} else {
+			Intent i = new Intent(this, Starting.class);
+			i.putExtra("loadroute", 1);
+			startActivity(i);
+		}
+		analyticsTracker.trackEvent("Load Route",            // Category, i.e. New Route Button
+				"Button",                // Action, i.e. New Route
+				"clicked",               // Label    i.e. New Route
+				DogUtil.TRACKER_VALUE);  // Value,
 
-        DogUtil.TRACKER_VALUE++;
-    }
+		DogUtil.TRACKER_VALUE++;
+	}
 
-    public void onClickStatisticsButton(View v) {
-        if(app.getCurrentUserId()==null) {
-            startActivityForResult(new Intent(this, PreSignup.class), DogChowApplication.STATISTICS);
-        } else {
-            startActivity(new Intent(this, Report.class));
-        }
-        analyticsTracker.trackEvent("Statictics",           // Category, i.e. Statictics Button
-                                    "Button",               // Action, i.e. New Route
-                                    "clicked",              // Label    i.e. New Route
-                                    DogUtil.TRACKER_VALUE); // Value,
-        DogUtil.TRACKER_VALUE++;
-    }
+	public void onClickStatisticsButton(View v) {
+		if(app.getCurrentUserId()==null) {
+			startActivityForResult(new Intent(this, PreSignup.class), DogUtil.STATISTICS);
+		} else {
+			startActivity(new Intent(this, Report.class));
+		}
+		analyticsTracker.trackEvent("Statictics",           // Category, i.e. Statictics Button
+				"Button",               // Action, i.e. New Route
+				"clicked",              // Label    i.e. New Route
+				DogUtil.TRACKER_VALUE); // Value,
+		DogUtil.TRACKER_VALUE++;
+	}
 
-    public void onClickDogWelfare(View v) {
-        if(app.getCurrentUserId()==null) {
-            startActivityForResult(new Intent(this, PreSignup.class), DogChowApplication.DOGWELFARE);
-        } else {
-            startActivity(new Intent(this, DogRegister.class));
-        }
-    }
+	public void onClickDogWelfare(View v) {
+		if(app.getCurrentUserId()==null) {
+			startActivityForResult(new Intent(this, PreSignup.class), DogUtil.DOGWELFARE);
+		} else {
+			startActivity(new Intent(this, DogRegister.class));
+		}
+	}
 
-    public void onClickTButtonLeftButton(View v) {
-        finish();
-    }
+	public void onClickTButtonLeftButton(View v) {
+		finish();
+	}
 
-    public void onClickTButtonRightButton(View v) {
-        progress_title.setVisibility(View.VISIBLE);
-        runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if(AppData.getLoginType() == USER_LOGIN_TYPE.APPLICATION){
-                        SharedPreferences pref = getSharedPreferences(Utilities.DOGCHOW, 0);
-                        SharedPreferences.Editor edit = pref.edit();
-                        edit.putString(Utilities.USER_ID,"");
-                        edit.commit();
+	public void onClickTButtonRightButton(View v) {
+		progress_title.setVisibility(View.VISIBLE);
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if(AppData.getLoginType() == USER_LOGIN_TYPE.APPLICATION){
+					SharedPreferences pref = getSharedPreferences(Utilities.DOGCHOW, 0);
+					SharedPreferences.Editor edit = pref.edit();
+					edit.putString(Utilities.USER_ID,"");
+					edit.commit();
 
-                        i =new Intent(ExerciseMenu.this,MainActivity.class);
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        startActivity(i);
-                        finish();
-                        progress_title.setVisibility(View.INVISIBLE);
-                    } else if (AppData.getLoginType() == USER_LOGIN_TYPE.FACEBOOK){
-                        title_right.setVisibility(View.INVISIBLE);
-                        titleBar.setVisibility(View.VISIBLE);
+					i =new Intent(ExerciseMenu.this,MainActivity.class);
+					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+					i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+					startActivity(i);
+					finish();
+					progress_title.setVisibility(View.INVISIBLE);
+				} else if (AppData.getLoginType() == USER_LOGIN_TYPE.FACEBOOK){
+					title_right.setVisibility(View.INVISIBLE);
+					titleBar.setVisibility(View.VISIBLE);
 
-                        facebook = ((DogUtil)getApplication()).getFacebook();
-                        logoutFb();
-                    } else {
-                        SharedPreferences pref = getSharedPreferences(Utilities.DOGCHOW, 0);
-                        SharedPreferences.Editor edit = pref.edit();
-                        edit.putString(Utilities.USER_ID,"");
-                        edit.commit();
+					facebook = ((DogUtil)getApplication()).getFacebook();
+					logoutFb();
+				} else {
+					SharedPreferences pref = getSharedPreferences(Utilities.DOGCHOW, 0);
+					SharedPreferences.Editor edit = pref.edit();
+					edit.putString(Utilities.USER_ID,"");
+					edit.commit();
 
-                        i =new Intent(ExerciseMenu.this,MainActivity.class);
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        startActivity(i);
-                        finish();
-                        progress_title.setVisibility(View.INVISIBLE);
-                    }
-                }
-            });
-    }
+					i =new Intent(ExerciseMenu.this,MainActivity.class);
+					i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+					i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+					startActivity(i);
+					finish();
+					progress_title.setVisibility(View.INVISIBLE);
+				}
+			}
+		});
+	}
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		super.onActivityResult(requestCode, resultCode, intent);
+
+		if (resultCode == Activity.RESULT_OK && intent != null){
+
+			if ( requestCode == DogUtil.NEW_ROUTE){
+
+				Bundle extras = intent.getExtras();
+				Integer idUser = (Integer) extras.get("ID_USER");
+
+				if (idUser>0){
+					Intent i = new Intent(this, Starting.class);
+					i.putExtra("loadroute", 2);
+					startActivity(i);
+				}
+
+
+
+			}
+			else if (requestCode == DogUtil.LOAD_ROUTE){
+				Intent i = new Intent(this, Starting.class);
+				i.putExtra("loadroute", 1);
+				startActivity(i);
+			}
+			else if (requestCode == DogUtil.DOGWELFARE){
+				startActivity(new Intent(this, DogRegister.class));
+			}
+
+		}
+	}
+
 }

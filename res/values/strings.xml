@@ -210,8 +210,8 @@
     <string name="to_signup_with">Registrarse con</string>
     <string name="ups">¡Ups!</string>
     <string name="an_error_ocurred">¡Ocurrió un error!</string>
-    <string name="please_wait_signing_up">Por favor espere... ¡registrando!</string>
-
+    <string name="please_wait_signing_up">"Por favor espere... ¡registrando!"</string>
+   
     <!-- Login activity -->
     <string name="title_activity_login">LoginActivity</string>
     <string name="to_login_with">Iniciar sesión con</string>
