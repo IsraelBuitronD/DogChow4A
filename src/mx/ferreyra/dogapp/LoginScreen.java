@@ -11,7 +11,6 @@ import java.net.UnknownServiceException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import mx.ferreyra.dogapp.AppData.USER_LOGIN_TYPE;
 import mx.ferreyra.dogapp.org.ksoap2.SoapEnvelope;
 import mx.ferreyra.dogapp.org.ksoap2.serialization.SoapObject;
 import mx.ferreyra.dogapp.org.ksoap2.serialization.SoapSerializationEnvelope;
@@ -25,7 +24,6 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.RectF;
 import android.graphics.drawable.GradientDrawable;
@@ -223,8 +221,9 @@ public class LoginScreen extends Activity{
 				}else if (returnValue.equals("-3")) {
 					Toast.makeText(getApplicationContext(), R.string.user_not_exist, Toast.LENGTH_SHORT).show();
 				}else{
-					String userId = returnValue;
+					Integer userId = Integer.parseInt( returnValue );
 
+					/*
 					SharedPreferences pref = getSharedPreferences(Utilities.DOGCHOW, 0);
 					SharedPreferences.Editor edit = pref.edit();
 					edit.putString(Utilities.USER_ID,userId); 
@@ -237,6 +236,18 @@ public class LoginScreen extends Activity{
 					editor.putString(Utilities.ROUTE_SPEED, getResources().getString(R.string.route_speed));
 					editor.commit();
 
+*/
+					
+					
+					Intent intent = new Intent();
+			        intent.putExtra("ID_USER", userId);
+					
+					setResult(RESULT_OK, intent);
+					finish();
+					
+					/*
+					 
+					
 					AppData.USER_ID = userId.trim();
 					AppData.assignType(USER_LOGIN_TYPE.APPLICATION); 
 
@@ -245,6 +256,8 @@ public class LoginScreen extends Activity{
 					startActivity(i);
 					
 					//finish();
+					 * 
+					 */
 				}
 			}catch (Exception e) { 
 

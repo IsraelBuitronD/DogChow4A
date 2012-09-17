@@ -25,7 +25,7 @@ public class PreSignup extends Activity {
 	}
 
 	public void onClickLoginButton(View view) {
-		startActivityForResult(new Intent(this, LoginActivity.class), LOGIN);
+		startActivityForResult(new Intent(this, LoginScreen.class), LOGIN);
 	}
 
 	public void onClickRecoverPasswordButton(View view) {
