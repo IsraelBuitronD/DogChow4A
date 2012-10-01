@@ -29,17 +29,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageView;
 
 public class ShowCalendar extends Activity {
 
 
-    private int idButtons[] ={
+    private final int idButtons[] ={
 
             R.id.bt_1, R.id.bt_2, R.id.bt_3, R.id.bt_4, R.id.bt_5,
             R.id.bt_6, R.id.bt_7, R.id.bt_8, R.id.bt_9, R.id.bt_10,
@@ -92,14 +88,14 @@ public class ShowCalendar extends Activity {
     public void onclickPhoto (View v){
 
         if (month == -1 || year == -1 ){
-            return; 
+            return;
         }
 
 
         if ( v.getTag() != null){
             new DialogPhotoOptions(  (FotosMascotaByUsuarioMesAnoResponse)v.getTag(), context).buildShow();
         }
-        
+
         else {
 
 
@@ -168,7 +164,7 @@ public class ShowCalendar extends Activity {
         builder = Build.VERSION.SDK_INT>=11 ?
                 new AlertDialog.Builder(context,AlertDialog.THEME_HOLO_LIGHT) :
                     new AlertDialog.Builder(context);
-                builder.setTitle("A–o");
+                builder.setTitle("A\u00f1o");
                 builder.setSingleChoiceItems(Recursos.DOG_YEARS,  year, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int item) {
@@ -186,12 +182,12 @@ public class ShowCalendar extends Activity {
     public void  onClickConsultCalButton (View v){
 
         if (month == -1 || year == -1 ){
-            UI.showAlertDialog("Upps", "Por favor selecione una fecha v‡lida", "ok", context, null);
+            UI.showAlertDialog("Upps", "Por favor selecione una fecha v\u00e1lida", "ok", context, null);
         }
         else{
             new MyCalAsyncTask().execute();
         }
-    } 
+    }
 
 
 
@@ -206,7 +202,7 @@ public class ShowCalendar extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progress =ProgressDialog.show(context, "Espere de favor", "Actualizando informaci—n", true, false);
+            progress =ProgressDialog.show(context, "Espere de favor", "Actualizando informaci\u00f3n", true, false);
 
         }
 
@@ -217,7 +213,7 @@ public class ShowCalendar extends Activity {
             String bestProvider;
             LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
-            bestProvider = locationManager.getBestProvider(criteria, true);      
+            bestProvider = locationManager.getBestProvider(criteria, true);
             Location location = locationManager.getLastKnownLocation(bestProvider);
 
             List<FotosMascotaByUsuarioMesAnoResponse> ans = null;
@@ -240,7 +236,7 @@ public class ShowCalendar extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
                 ans = null;
-            } 
+            }
 
             return ans;
         }
@@ -287,7 +283,7 @@ public class ShowCalendar extends Activity {
             Drawable icon = new BitmapDrawable(getResources(),bmp);
 
             icon.setBounds(
-                    0 - icon.getIntrinsicWidth() / 2, 0 - icon.getIntrinsicHeight(), 
+                    0 - icon.getIntrinsicWidth() / 2, 0 - icon.getIntrinsicHeight(),
                     icon.getIntrinsicWidth() / 2, 0);
 
             return  icon;
